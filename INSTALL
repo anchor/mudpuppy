@@ -1,0 +1,10 @@
+- First, get make-magic up and running. It's available from
+  https://github.com/anchor/make-magic
+
+- Install python2.6 or newer
+
+- Install 'requests' following from PyPi using easy_install or pip. e.g.:
+
+	pip install requests
+
+- Read the README to get started

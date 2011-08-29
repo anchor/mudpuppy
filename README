@@ -1,0 +1,42 @@
+mudpuppy is a Python based automation agent/client for make-magic
+
+It allows you to write independant 'modules' in Python code, to automate
+items in a make-magic task.  When run, mudpuppy will poll a make-magic
+server for tasks that are outstanding, and will complete any items with
+which it has a module for. Once the module has run successfully, mudpuppy
+will tell make-magic that the item has been completed, and then will look
+for more work to do.
+
+There are some example modules in modules/test.py. The simplest case is:
+
+class TestModule(Automatia):
+        '''Test item automation model
+        Successfuly automates a specific item
+        '''
+        can_handle = ('TestModuleItem',)
+
+        def do_magic(self):
+		print "Hello world"
+
+which will automate an item with the name 'TestModuleItem' by printing
+"Hello world" to stdout, and then returning successfully (allowing the
+item to be marked as complete).
+
+In config.py you can define both the API URL of your make-magic server, 
+as well as a list of modules to load. Only modules listed in the
+installed_items config item will by loaded by mudpuppy. 
+
+There is also a helper base class that allows you to easily kick off
+an Orchestra job, wait for it to complete, and optionally update the
+make-magic task state from the key/value pairs returned by Orchestra.
+This makes it very easy to integrate Orchestra with make-magic/mudpuppy
+with very little work. Look in modules/test.py for some examples for
+doing this.  See https://github.com/anchor/orchestra for more information
+about Orchestra.
+
+Although make-magic is designed to be able to be used with almost no python
+knowledge, mudpuppy is specifically designed to automate items with python
+code; Feel free to implement agents such as this in any other language you
+wish.
+
+For more information on make-magic, see https://github.com/anchor/make-magic
