@@ -73,7 +73,7 @@ class MagicAPI(object):
 	#
 	def get_tasks(self):
 		'''return a list of all task UUIDs'''
-		return self.json_http_get('task')
+		return self.json_http_get('task/')
 	def get_task(self,uuid):
 		'''return all data for a task'''
 		return self.json_http_get('task/%s' % (str(uuid),))
